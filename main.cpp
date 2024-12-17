@@ -4,17 +4,15 @@ using namespace std;
 
 struct suffix
 {
-    int index;   // To store original index of suffix
-    int rank[2]; // To store current rank and next rank of suffix
+    int index;   // to store original index of suffix
+    int rank[2]; // to store current rank and next rank of suffix
 };
 
-// Comparison function used by mergeSort to compare two suffixes
 bool cmp(struct suffix a, struct suffix b)
 {
     return (a.rank[0] == b.rank[0]) ? (a.rank[1] < b.rank[1]) : (a.rank[0] < b.rank[0]);
 }
 
-// Merge two halves of the suffix array
 void merge(struct suffix arr[], int left, int mid, int right)
 {
     int n1 = mid - left + 1;
@@ -23,7 +21,7 @@ void merge(struct suffix arr[], int left, int mid, int right)
     suffix *L = new suffix[n1];
     suffix *R = new suffix[n2];
 
-    // Copy data to temporary arrays
+    // copy data to temporary arrays
     for (int i = 0; i < n1; i++)
         L[i] = arr[left + i];
     for (int j = 0; j < n2; j++)
@@ -85,7 +83,6 @@ int *buildSuffixArray(char *txt, int n)
         suffixes[i].rank[1] = ((i + 1) < n) ? txt[i + 1] : -1;
     }
 
-    // Sort suffixes according to the first 2 characters
     mergeSort(suffixes, 0, n - 1);
 
     int ind[n];
@@ -127,7 +124,6 @@ int *buildSuffixArray(char *txt, int n)
     return suffixArr;
 }
 
-// Print the suffix array
 void printArr(int arr[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -137,7 +133,6 @@ void printArr(int arr[], int n)
     cout << endl;
 }
 
-// Suffix Array class to manage text and suffix array
 class SuffixArray
 {
 private:
